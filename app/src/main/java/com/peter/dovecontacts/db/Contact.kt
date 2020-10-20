@@ -9,14 +9,14 @@ import androidx.room.PrimaryKey
 data class Contact(
 
     @PrimaryKey(autoGenerate = true)
-    var id: Long,
+    var id: Int,
 
     @ColumnInfo(name = "name")
-    var name : String,
+    var name: String,
 
     @ColumnInfo(name = "number")
-    var number : String,
+    var number: String,
 
     @ColumnInfo(name = "initial")
-    var initial : String
+    var initial: String
 )
