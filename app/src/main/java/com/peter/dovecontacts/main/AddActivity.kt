@@ -1,4 +1,4 @@
-package com.peter.dovecontacts.addactivity
+package com.peter.dovecontacts.main
 
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.peter.dovecontacts.R
 import com.peter.dovecontacts.db.Contact
-import com.peter.dovecontacts.main.MainViewModel
 import kotlinx.android.synthetic.main.activity_add.*
 
 class AddActivity : AppCompatActivity(){
@@ -20,7 +19,9 @@ class AddActivity : AppCompatActivity(){
 
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         //데이터가 입력되었는지 확인하고 저장
-        if (intent != null && intent.hasExtra(EXTRA_CONTACT_NAME) && intent.hasExtra(EXTRA_CONTACT_NUMBER)
+        if (intent != null && intent.hasExtra(EXTRA_CONTACT_NAME) && intent.hasExtra(
+                EXTRA_CONTACT_NUMBER
+            )
             && intent.hasExtra(EXTRA_CONTACT_ID)){
             add_edittext_name.setText(intent.getStringExtra(EXTRA_CONTACT_NAME))
             add_edittext_number.setText(intent.getStringExtra(EXTRA_CONTACT_NUMBER))
@@ -28,21 +29,20 @@ class AddActivity : AppCompatActivity(){
         }
 
 
-        add_button.apply {
-            setOnClickListener {
+        add_button.setOnClickListener {
                 val name = add_edittext_name.text.toString().trim()
                 val number = add_edittext_number.text.toString()
 
                 if (name.isNotEmpty()||number.isNotEmpty()){
-                    Toast.makeText(this@AddActivity, "Please enter name and number.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please enter name and number.", Toast.LENGTH_SHORT).show()
                 }else{
-                    val initial = name
+                    val initial = name[0].toUpperCase()
                     val contact = Contact(id, name, number, initial)
                     mainViewModel.insert(contact)
                     finish()
                 }
             }
-        }
+
 
     }
 

@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 data class Contact(
 
     @PrimaryKey(autoGenerate = true)
-    var id: Int,
+    var id: Long?,
 
     @ColumnInfo(name = "name")
     var name: String,
@@ -18,5 +18,7 @@ data class Contact(
     var number: String,
 
     @ColumnInfo(name = "initial")
-    var initial: String
-)
+    var initial: Char
+){
+    constructor():this(null,"","",'\u0000')
+}

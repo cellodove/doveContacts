@@ -8,7 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.peter.dovecontacts.R
-import com.peter.dovecontacts.addactivity.AddActivity
 import com.peter.dovecontacts.db.Contact
 import com.peter.dovecontacts.main.recyclerview.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -46,6 +45,14 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.getAll().observe(this, Observer<List<Contact>> { contacts ->
             adapter.setContacts(contacts!!)
         })
+
+        main_button.setOnClickListener {
+                val intent = Intent(this, AddActivity::class.java)
+                startActivity(intent)
+
+        }
+
+
     }
 
     private fun deleteDialog(contact: Contact) {
